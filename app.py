@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-"""Medical ChatBot.ipynb"""
+
 
 import os
 import requests
@@ -10,7 +9,6 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
-# Load GEMINI API Key
 GOOGLE_API_KEY = st.secrets["GEMINI_API_KEY"]
 os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 
@@ -30,7 +28,7 @@ def get_medical_info_from_wiki(condition):
     except Exception as e:
         return f"⚠️ Error fetching info: {e}"
 
-# ------------------- Custom CSS -------------------
+
 st.markdown("""
     <style>
         html, body, [class*="css"] {
@@ -98,11 +96,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ------------------- Header -------------------
+
 st.markdown('<div class="header-title">🤖 AI Medical Assistant</div>', unsafe_allow_html=True)
 st.markdown('<div class="header-subtitle">Built by Ayaz Khan | Powered by Gemini AI</div>', unsafe_allow_html=True)
 
-# ------------------------ GEMINI SETUP ------------------------
+
 
 gemini = ChatGoogleGenerativeAI(
     model='gemini-2.0-flash-001',
@@ -158,7 +156,6 @@ conversation_chain = RunnableWithMessageHistory(
     history_messages_key="history",
 )
 
-# ------------------------ DISPLAY CHAT HISTORY ------------------------
 
 for msg in streamlit_msg_history.messages:
     with st.chat_message(msg.type):
@@ -171,7 +168,6 @@ for msg in streamlit_msg_history.messages:
                 response = response.replace(term, f'<span class="highlighted-term">{term}</span>')
             st.markdown(f'<div class="ai-message">{response}</div>', unsafe_allow_html=True)
 
-# ------------------------ USER INPUT SECTION ------------------------
 
 user_prompt = st.chat_input("Type your medical condition here...")
 
@@ -202,7 +198,7 @@ if user_prompt:
             wiki_data = get_medical_info_from_wiki(user_prompt)
             st.markdown(f'<div class="ai-message">{wiki_data}</div>', unsafe_allow_html=True)
 
-# ------------------------ FOOTER ------------------------
+
 
 st.markdown('<div class="footer">Developed by Ayaz Khan | Medical Assistant Chatbot | Powered by AI</div>', unsafe_allow_html=True)
 
