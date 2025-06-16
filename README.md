@@ -1,4 +1,7 @@
 🤖 AI Medical Assistant
+
+
+
 A comprehensive medical chatbot built with Streamlit and powered by Google's Gemini AI. This application provides reliable medical information, symptom analysis, and health guidance through an intuitive chat interface.
 
 ✨ Features
